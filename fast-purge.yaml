@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Fast Purge API
+  title: Fast Purge API v3
   version: '3'
 servers: []
 paths:
