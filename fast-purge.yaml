@@ -8,7 +8,7 @@ paths:
     parameters:
     - $ref: parameters/network-path.yaml
     post:
-      operationId: POST_delete-cpcode-network
+      operationId: POST_delete-cpcode-network-test
       description: 'Delete by CP code: Deletes content on the selected CP code for
 
         the selected `network`.  In most cases, you should
