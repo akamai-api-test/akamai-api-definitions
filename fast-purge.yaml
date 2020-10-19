@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Fast Purge API v3
+  title: Fast Purge API
   version: '3'
 servers: []
 paths:
@@ -8,7 +8,7 @@ paths:
     parameters:
     - $ref: parameters/network-path.yaml
     post:
-      operationId: POST_delete-cpcode-network-test
+      operationId: POST_delete-cpcode-network
       description: 'Delete by CP code: Deletes content on the selected CP code for
 
         the selected `network`.  In most cases, you should
@@ -319,6 +319,59 @@ paths:
     post:
       operationId: POST_invalidate-url-network
       description: "Invalidate by URL or ARL: Invalidates content on the selected URL or ARL \nfor the selected `network`. You should consider invalidating\ncontent by default. This keeps each object in cache until the\nversion on your origin server is newer.  Deletion retrieves the\nobject regardless, which can dramatically increase the load on\nyour origin server and would prevent Akamai from serving the\nold content if your origin is unreachable. URLs and ARLs can be \nsubmitted in the same request. Note that it takes longer to purge ARLs when \nusing the [Control Center](https://control.akamai.com/apps/fast-purge/#/ccu-main) \ninterface. Use this API to purge them within five seconds.\n"
+      requestBody:
+        content:
+          application/json:
+            example:
+              $ref: examples/url_request.json
+            schema:
+              $ref: schemas/UrlRequest.yaml
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                $ref: examples/201.json
+              schema:
+                $ref: schemas/Response.yaml
+          description: ''
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: schemas/Response.yaml
+          description: ''
+        403:
+          content:
+            application/json:
+              example:
+                $ref: examples/403.json
+              schema:
+                $ref: schemas/Response.yaml
+          description: ''
+        429:
+          content:
+            application/json:
+              example:
+                $ref: examples/url_429.json
+              schema:
+                $ref: schemas/Response.yaml
+          description: ''
+        500:
+          content:
+            application/json:
+              example:
+                $ref: examples/500.json
+              schema:
+                $ref: schemas/Response.yaml
+          description: ''
+  /trace/{network}:
+    parameters:
+    - $ref: parameters/network-path.yaml
+    post:
+      operationId: POST_trace-network
+      description: "Trace a purge by network.\n"
       requestBody:
         content:
           application/json:
